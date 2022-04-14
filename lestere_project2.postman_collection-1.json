@@ -1,0 +1,989 @@
+{
+	"info": {
+		"_postman_id": "ee145803-aa37-403c-b9d9-36891c35295b",
+		"name": "lestere_project2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "delete all",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/delete",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postboat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"boat_id\", pm.response.json()[\"id\"]);\r",
+							"pm.environment.set(\"owners_id\", pm.response.json()[\"owner\"]);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"    \r",
+							"pm.test(\"returns boat added, check length\", function () {\r",
+							"    pm.expect(pm.response.json().length).to.eq(pm.response.json()[\"length\"]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Odysdssey\",\r\n  \"type\": \"Yatasdch\",\r\n  \"length\": 9449,\r\n  \"public\": true\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/boats",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boats"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "boatyboatface",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "wood",
+							"disabled": true
+						},
+						{
+							"key": "length",
+							"value": "34",
+							"disabled": true
+						},
+						{
+							"key": "public",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "owner",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjI3YzcyNjE5ZDA5MzVhMjkwYzQxYzNmMDEwMTY3MTM4Njg1ZjdlNTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiOTQyMjAyNDY2NjAyLXU2Y3A5OTFsZXFtZWRtN3R0N3JxZ2pqYzdlcXVpc3MwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiOTQyMjAyNDY2NjAyLXU2Y3A5OTFsZXFtZWRtN3R0N3JxZ2pqYzdlcXVpc3MwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAxOTM4MjY1Nzk0MDA1MTUyMzQ3IiwiaGQiOiJvcmVnb25zdGF0ZS5lZHUiLCJlbWFpbCI6Imxlc3RlcmVAb3JlZ29uc3RhdGUuZWR1IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJFS2ZIaVpvbTcxMnlaRTRfeVd2RUpRIiwiaWF0IjoxNjM3MDA2MzQ1LCJleHAiOjE2MzcwMDk5NDV9.NjeeAlzFrp_9TVzfEzm7GFe525dHwuYs__P__TGrKfNiQw5IqB1nx8E_tZRfAkqWzjlDb5s0SlOvBOjgIPshLcSqAfvs4DdNjpOF4d2v6RhfHX1U_J0PgfV0zJJS0gr40GVlWmVm4YBPhwZaDPUtINHGrjlLYuvrkQ4j3_iieFTYgBe_XnL3aGx-FsFaH2Bq4P04zacb1goek26aVAUvjQX4qVIvL_EV0GpsHTZRcuxvR5HnfwFgt7S5tHJtYS44aBzYZQRK78bbeEnk92HQwDYGR9sOZBK3xdyDKMkMC7z7eChyDTKlXD5y8F5yWDNbWk-Ke6k_7UbhpJCRYpekpQ",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getboat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/boats/{{boat_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boats",
+						"{{boat_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getboat_badauth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/boats/{{boat_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boats",
+						"{{boat_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getboat_noauth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 401\", function () {\r",
+							"    pm.response.to.have.status(401);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/boats/{{boat_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boats",
+						"{{boat_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit boat 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"202 status code\", function () {",
+							"    pm.response.to.have.status(202);",
+							"});",
+							"",
+							"pm.test(\"content is valid\", function () {",
+							"    pm.expect(pm.response.json()[\"type\"]).to.eq(\"Yatasdch\");",
+							"    pm.expect(pm.response.json()[\"length\"]).to.eq(200);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Mega Yatch\",\r\n  \"length\": 200\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/boats/{{boat_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boats",
+						"{{boat_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getboat Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/boats/{{boat_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boats",
+						"{{boat_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit boat 202",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"202 status code\", function () {",
+							"    pm.response.to.have.status(202);",
+							"});",
+							"",
+							"pm.test(\"content is valid\", function () {",
+							"    pm.expect(pm.response.json()[\"name\"]).to.eq(\"Odyssey III\");",
+							"    pm.expect(pm.response.json()[\"type\"]).to.eq(\"Mega Yatch\");",
+							"    pm.expect(pm.response.json()[\"length\"]).to.eq(260);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Odyssey III\",\r\n  \"type\": \"Mega Yatch\",\r\n  \"length\": 260\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/boats/{{boat_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boats",
+						"{{boat_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getboat Copy 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/boats/{{boat_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boats",
+						"{{boat_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteboat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/boats/{{boat_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boats",
+						"{{boat_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getboat_noboat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/boats/{{boat_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"boats",
+						"{{boat_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"load_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"weight\": 5,\r\n    \"content\": \"Wood\",\r\n    \"radioactive\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/loads",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"loads"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getloads_check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"    \r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/loads",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"loads"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "boatyboatface",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "wood",
+							"disabled": true
+						},
+						{
+							"key": "length",
+							"value": "34",
+							"disabled": true
+						},
+						{
+							"key": "public",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "owner",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjI3YzcyNjE5ZDA5MzVhMjkwYzQxYzNmMDEwMTY3MTM4Njg1ZjdlNTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiOTQyMjAyNDY2NjAyLXU2Y3A5OTFsZXFtZWRtN3R0N3JxZ2pqYzdlcXVpc3MwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiOTQyMjAyNDY2NjAyLXU2Y3A5OTFsZXFtZWRtN3R0N3JxZ2pqYzdlcXVpc3MwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAxOTM4MjY1Nzk0MDA1MTUyMzQ3IiwiaGQiOiJvcmVnb25zdGF0ZS5lZHUiLCJlbWFpbCI6Imxlc3RlcmVAb3JlZ29uc3RhdGUuZWR1IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJFS2ZIaVpvbTcxMnlaRTRfeVd2RUpRIiwiaWF0IjoxNjM3MDA2MzQ1LCJleHAiOjE2MzcwMDk5NDV9.NjeeAlzFrp_9TVzfEzm7GFe525dHwuYs__P__TGrKfNiQw5IqB1nx8E_tZRfAkqWzjlDb5s0SlOvBOjgIPshLcSqAfvs4DdNjpOF4d2v6RhfHX1U_J0PgfV0zJJS0gr40GVlWmVm4YBPhwZaDPUtINHGrjlLYuvrkQ4j3_iieFTYgBe_XnL3aGx-FsFaH2Bq4P04zacb1goek26aVAUvjQX4qVIvL_EV0GpsHTZRcuxvR5HnfwFgt7S5tHJtYS44aBzYZQRK78bbeEnk92HQwDYGR9sOZBK3xdyDKMkMC7z7eChyDTKlXD5y8F5yWDNbWk-Ke6k_7UbhpJCRYpekpQ",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit load 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"202 status code\", function () {",
+							"    pm.response.to.have.status(202);",
+							"});",
+							"",
+							"pm.test(\"content is valid\", function () {",
+							"    pm.expect(pm.response.json()[\"radioactive\"]).to.eq(true);",
+							"    pm.expect(pm.response.json()[\"weight\"]).to.eq(14);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"weight\": 14,\r\n    \"radioactive\": true\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/loads/{{load_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"loads",
+						"{{load_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getloads_check_patch",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"    \r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/loads",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"loads"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "boatyboatface",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "wood",
+							"disabled": true
+						},
+						{
+							"key": "length",
+							"value": "34",
+							"disabled": true
+						},
+						{
+							"key": "public",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "owner",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjI3YzcyNjE5ZDA5MzVhMjkwYzQxYzNmMDEwMTY3MTM4Njg1ZjdlNTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiOTQyMjAyNDY2NjAyLXU2Y3A5OTFsZXFtZWRtN3R0N3JxZ2pqYzdlcXVpc3MwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiOTQyMjAyNDY2NjAyLXU2Y3A5OTFsZXFtZWRtN3R0N3JxZ2pqYzdlcXVpc3MwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAxOTM4MjY1Nzk0MDA1MTUyMzQ3IiwiaGQiOiJvcmVnb25zdGF0ZS5lZHUiLCJlbWFpbCI6Imxlc3RlcmVAb3JlZ29uc3RhdGUuZWR1IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJFS2ZIaVpvbTcxMnlaRTRfeVd2RUpRIiwiaWF0IjoxNjM3MDA2MzQ1LCJleHAiOjE2MzcwMDk5NDV9.NjeeAlzFrp_9TVzfEzm7GFe525dHwuYs__P__TGrKfNiQw5IqB1nx8E_tZRfAkqWzjlDb5s0SlOvBOjgIPshLcSqAfvs4DdNjpOF4d2v6RhfHX1U_J0PgfV0zJJS0gr40GVlWmVm4YBPhwZaDPUtINHGrjlLYuvrkQ4j3_iieFTYgBe_XnL3aGx-FsFaH2Bq4P04zacb1goek26aVAUvjQX4qVIvL_EV0GpsHTZRcuxvR5HnfwFgt7S5tHJtYS44aBzYZQRK78bbeEnk92HQwDYGR9sOZBK3xdyDKMkMC7z7eChyDTKlXD5y8F5yWDNbWk-Ke6k_7UbhpJCRYpekpQ",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit load 202",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"202 status code\", function () {",
+							"    pm.response.to.have.status(202);",
+							"});",
+							"",
+							"pm.test(\"content is valid\", function () {",
+							"    pm.expect(pm.response.json()[\"radioactive\"]).to.eq(false);",
+							"    pm.expect(pm.response.json()[\"content\"]).to.eq(\"Crazy String\");",
+							"    pm.expect(pm.response.json()[\"weight\"]).to.eq(14);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"weight\": 14,\r\n    \"content\": \"Crazy String\",\r\n    \"radioactive\": false\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/loads/{{load_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"loads",
+						"{{load_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getloads_check_put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"    \r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/loads",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"loads"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "boatyboatface",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "wood",
+							"disabled": true
+						},
+						{
+							"key": "length",
+							"value": "34",
+							"disabled": true
+						},
+						{
+							"key": "public",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "owner",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjI3YzcyNjE5ZDA5MzVhMjkwYzQxYzNmMDEwMTY3MTM4Njg1ZjdlNTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiOTQyMjAyNDY2NjAyLXU2Y3A5OTFsZXFtZWRtN3R0N3JxZ2pqYzdlcXVpc3MwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiOTQyMjAyNDY2NjAyLXU2Y3A5OTFsZXFtZWRtN3R0N3JxZ2pqYzdlcXVpc3MwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAxOTM4MjY1Nzk0MDA1MTUyMzQ3IiwiaGQiOiJvcmVnb25zdGF0ZS5lZHUiLCJlbWFpbCI6Imxlc3RlcmVAb3JlZ29uc3RhdGUuZWR1IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJFS2ZIaVpvbTcxMnlaRTRfeVd2RUpRIiwiaWF0IjoxNjM3MDA2MzQ1LCJleHAiOjE2MzcwMDk5NDV9.NjeeAlzFrp_9TVzfEzm7GFe525dHwuYs__P__TGrKfNiQw5IqB1nx8E_tZRfAkqWzjlDb5s0SlOvBOjgIPshLcSqAfvs4DdNjpOF4d2v6RhfHX1U_J0PgfV0zJJS0gr40GVlWmVm4YBPhwZaDPUtINHGrjlLYuvrkQ4j3_iieFTYgBe_XnL3aGx-FsFaH2Bq4P04zacb1goek26aVAUvjQX4qVIvL_EV0GpsHTZRcuxvR5HnfwFgt7S5tHJtYS44aBzYZQRK78bbeEnk92HQwDYGR9sOZBK3xdyDKMkMC7z7eChyDTKlXD5y8F5yWDNbWk-Ke6k_7UbhpJCRYpekpQ",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteload",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/loads/{{load_id}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"loads",
+						"{{load_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getloads_check_delete",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"    \r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/loads",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"loads"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "boatyboatface",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "wood",
+							"disabled": true
+						},
+						{
+							"key": "length",
+							"value": "34",
+							"disabled": true
+						},
+						{
+							"key": "public",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "owner",
+							"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjI3YzcyNjE5ZDA5MzVhMjkwYzQxYzNmMDEwMTY3MTM4Njg1ZjdlNTMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiOTQyMjAyNDY2NjAyLXU2Y3A5OTFsZXFtZWRtN3R0N3JxZ2pqYzdlcXVpc3MwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiOTQyMjAyNDY2NjAyLXU2Y3A5OTFsZXFtZWRtN3R0N3JxZ2pqYzdlcXVpc3MwLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTAxOTM4MjY1Nzk0MDA1MTUyMzQ3IiwiaGQiOiJvcmVnb25zdGF0ZS5lZHUiLCJlbWFpbCI6Imxlc3RlcmVAb3JlZ29uc3RhdGUuZWR1IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJFS2ZIaVpvbTcxMnlaRTRfeVd2RUpRIiwiaWF0IjoxNjM3MDA2MzQ1LCJleHAiOjE2MzcwMDk5NDV9.NjeeAlzFrp_9TVzfEzm7GFe525dHwuYs__P__TGrKfNiQw5IqB1nx8E_tZRfAkqWzjlDb5s0SlOvBOjgIPshLcSqAfvs4DdNjpOF4d2v6RhfHX1U_J0PgfV0zJJS0gr40GVlWmVm4YBPhwZaDPUtINHGrjlLYuvrkQ4j3_iieFTYgBe_XnL3aGx-FsFaH2Bq4P04zacb1goek26aVAUvjQX4qVIvL_EV0GpsHTZRcuxvR5HnfwFgt7S5tHJtYS44aBzYZQRK78bbeEnk92HQwDYGR9sOZBK3xdyDKMkMC7z7eChyDTKlXD5y8F5yWDNbWk-Ke6k_7UbhpJCRYpekpQ",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUsers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwt1}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://hw6lestere.uw.r.appspot.com"
+		}
+	]
+}
